@@ -1,8 +1,5 @@
-# Serverless-AWS-Lambda-Node-Express-MongoDb Boilerplate 🚀
+# Boilerplate for Creating Restful API using Express.js, Node.js, Mongodb and Setting up on AWS Lambda
 
-Boilerplate for Creating Restful API using Express.js, Node.js, Mongodb and Setting up on AWS Lambda
-
-![Serverless-AWS-Lambda-Node-Express-MongoDb Search Results](https://mattwelke.com/assets/img/free-tier-sls-mongo-atlas/heading.png)
 
 - Prerequisites
 
@@ -23,7 +20,7 @@ In the root directory run the following command:
 It will save all the dependencies and dev-dependencies present in package.json
 
 **Setup the IAM Role and configure the serverless(sls) commandline.**
-
+--  credentials --provider aws --key <key> --secret <secret> (credential.csv)
 **Create an account on Mongodb Atlass Cloud and Whitelist the IP Address 0.0.0.0/0. Also create a user in database and setup it in secrets.json**
 
 **Create Restful API using Express and Node**
@@ -35,4 +32,8 @@ After ``` sls deploy ```. Code will be deployed on AWS Lambda. Head over to AWS 
 
 Cheers! **AWS Lambda Auto Scaling with increase in requests.**
 
-*Resource: Thanks Hackernoon*
+Current usage (voir keys)
+  POST <url>/api/notes
+    POST_DATA
+  
+ Ex post data title bla description blu
