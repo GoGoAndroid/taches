@@ -8,11 +8,11 @@
       "stage": "production",
       "variableSyntax": "\\${([ ~:a-zA-Z0-9._@'\",\\-\\/\\(\\)*?]+?)}",
       "name": "aws",
-      "runtime": "nodejs8.10",
+      "runtime": "nodejs10.x",
       "region": "ap-south-1",
       "environment": {
         "NODE_ENV": "production",
-        "DB": "mongodb+srv://admin:vintageVRT5@sls-api-pdbit.mongodb.net/test?retryWrites=true&w=majority"
+        "DB": "mongodb://sgoyet:bjjFOwUCcQTOGrYF@cluster0-shard-00-00-jkid5.mongodb.net:27017,cluster0-shard-00-01-jkid5.mongodb.net:27017,cluster0-shard-00-02-jkid5.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority"
       },
       "versionFunctions": true,
       "remoteFunctionData": null,
@@ -51,7 +51,11 @@
                         "Fn::Join": [
                           "",
                           [
-                            "arn:aws:s3:::",
+                            "arn:",
+                            {
+                              "Ref": "AWS::Partition"
+                            },
+                            ":s3:::",
                             {
                               "Ref": "ServerlessDeploymentBucket"
                             },
@@ -113,7 +117,8 @@
                       {
                         "Effect": "Allow",
                         "Action": [
-                          "logs:CreateLogStream"
+                          "logs:CreateLogStream",
+                          "logs:CreateLogGroup"
                         ],
                         "Resource": [
                           {
@@ -159,7 +164,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/sls-express-mongodb/production/1573753681786-2019-11-14T17:48:01.786Z/sls-express-mongodb.zip"
+                "S3Key": "serverless/sls-express-mongodb/production/1581369814444-2020-02-10T21:23:34.444Z/sls-express-mongodb.zip"
               },
               "FunctionName": "sls-express-mongodb-production-app",
               "Handler": "server.run",
@@ -170,12 +175,12 @@
                   "Arn"
                 ]
               },
-              "Runtime": "nodejs8.10",
+              "Runtime": "nodejs10.x",
               "Timeout": 6,
               "Environment": {
                 "Variables": {
                   "NODE_ENV": "production",
-                  "DB": "mongodb+srv://admin:vintageVRT5@sls-api-pdbit.mongodb.net/test?retryWrites=true&w=majority"
+                  "DB": "mongodb://sgoyet:bjjFOwUCcQTOGrYF@cluster0-shard-00-00-jkid5.mongodb.net:27017,cluster0-shard-00-01-jkid5.mongodb.net:27017,cluster0-shard-00-02-jkid5.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority"
                 }
               }
             },
@@ -184,14 +189,14 @@
               "IamRoleLambdaExecution"
             ]
           },
-          "AppLambdaVersionZRmodcvHkmv1ZYiFY9lC8YReBnm0VPaYt5mZ9tqLM": {
+          "AppLambdaVersionLD9HpIngGG1O7yTweM94nm3trrMJGezp3aKNuX4Sc": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "AppLambdaFunction"
               },
-              "CodeSha256": "3g7lpfxEEMn9XfFB63qqIRqhel4+eJVdjAcfpg/uBZM="
+              "CodeSha256": "i3eXh4/BlTdEwwuV0+UHBB57mqcOrfDxeAjwodxW24o="
             }
           },
           "ApiGatewayRestApi": {
@@ -202,7 +207,8 @@
                 "Types": [
                   "EDGE"
                 ]
-              }
+              },
+              "Policy": ""
             }
           },
           "ApiGatewayResourceProxyVar": {
@@ -231,8 +237,7 @@
                   "ResponseParameters": {
                     "method.response.header.Access-Control-Allow-Origin": true,
                     "method.response.header.Access-Control-Allow-Headers": true,
-                    "method.response.header.Access-Control-Allow-Methods": true,
-                    "method.response.header.Access-Control-Allow-Credentials": true
+                    "method.response.header.Access-Control-Allow-Methods": true
                   },
                   "ResponseModels": {}
                 }
@@ -250,8 +255,7 @@
                     "ResponseParameters": {
                       "method.response.header.Access-Control-Allow-Origin": "'*'",
                       "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
-                      "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,DELETE,GET,HEAD,PATCH,POST,PUT'",
-                      "method.response.header.Access-Control-Allow-Credentials": "'false'"
+                      "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,DELETE,GET,HEAD,PATCH,POST,PUT'"
                     },
                     "ResponseTemplates": {
                       "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".*\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
@@ -281,8 +285,7 @@
                   "ResponseParameters": {
                     "method.response.header.Access-Control-Allow-Origin": true,
                     "method.response.header.Access-Control-Allow-Headers": true,
-                    "method.response.header.Access-Control-Allow-Methods": true,
-                    "method.response.header.Access-Control-Allow-Credentials": true
+                    "method.response.header.Access-Control-Allow-Methods": true
                   },
                   "ResponseModels": {}
                 }
@@ -300,8 +303,7 @@
                     "ResponseParameters": {
                       "method.response.header.Access-Control-Allow-Origin": "'*'",
                       "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
-                      "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,DELETE,GET,HEAD,PATCH,POST,PUT'",
-                      "method.response.header.Access-Control-Allow-Credentials": "'false'"
+                      "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,DELETE,GET,HEAD,PATCH,POST,PUT'"
                     },
                     "ResponseTemplates": {
                       "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".*\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
@@ -406,7 +408,7 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1573753669215": {
+          "ApiGatewayDeployment1581369808832": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -468,7 +470,7 @@
           "AppLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "AppLambdaVersionZRmodcvHkmv1ZYiFY9lC8YReBnm0VPaYt5mZ9tqLM"
+              "Ref": "AppLambdaVersionLD9HpIngGG1O7yTweM94nm3trrMJGezp3aKNuX4Sc"
             }
           },
           "ServiceEndpoint": {
@@ -531,7 +533,11 @@
                         "Fn::Join": [
                           "",
                           [
-                            "arn:aws:s3:::",
+                            "arn:",
+                            {
+                              "Ref": "AWS::Partition"
+                            },
+                            ":s3:::",
                             {
                               "Ref": "ServerlessDeploymentBucket"
                             },
@@ -564,7 +570,7 @@
     "custom": {
       "secrets": {
         "NODE_ENV": "production",
-        "DB": "mongodb+srv://admin:vintageVRT5@sls-api-pdbit.mongodb.net/test?retryWrites=true&w=majority"
+        "DB": "mongodb://sgoyet:bjjFOwUCcQTOGrYF@cluster0-shard-00-00-jkid5.mongodb.net:27017,cluster0-shard-00-01-jkid5.mongodb.net:27017,cluster0-shard-00-02-jkid5.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority"
       }
     },
     "plugins": [
@@ -632,16 +638,18 @@
         "package": {},
         "memory": 1024,
         "timeout": 6,
-        "runtime": "nodejs8.10",
-        "vpc": {}
+        "runtime": "nodejs10.x",
+        "vpc": {},
+        "versionLogicalId": "AppLambdaVersionLD9HpIngGG1O7yTweM94nm3trrMJGezp3aKNuX4Sc"
       }
     },
     "serviceFilename": "serverless.yml",
     "layers": {},
-    "artifact": "C:\\Users\\irizv\\OneDrive\\Desktop\\serverless\\tutorial\\sls-express-mongodb\\.serverless\\sls-express-mongodb.zip"
+    "isDashboardMonitoringPreconfigured": false,
+    "artifact": "/Users/sgoyet/Documents/workspace_aws/serverless-lambda-node-express-mongodb/.serverless/sls-express-mongodb.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/sls-express-mongodb/production/1573753681786-2019-11-14T17:48:01.786Z",
+    "artifactDirectoryName": "serverless/sls-express-mongodb/production/1581369814444-2020-02-10T21:23:34.444Z",
     "artifact": "sls-express-mongodb.zip"
   }
 }
