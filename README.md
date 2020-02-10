@@ -8,6 +8,8 @@ Current usage (voir keys)
 ** Actuellement ici
 /Users/<user>/Documents/workspace_aws/taches
 
+Acces base : appli Mongo DB Compass
+Stats base: https://cloud.mongodb.com/
 
 # Boilerplate for Creating Restful API using Express.js, Node.js, Mongodb and Setting up on AWS Lambda
 
